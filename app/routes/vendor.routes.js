@@ -1,9 +1,32 @@
-const express = require('express');
-const router = express.Router();
-const vendorController = require('../controllers');
+module.exports = app => {
+    const vendors = require("../controllers/vendor.controller.js");
+  
+    var router = require("express").Router();
+    
+    // Create a new Vendors
+    router.post("/", vendors.create);
+  
+    // Retrieve all Vendors
+    router.get("/", vendors.findAll);
+  
+    // Retrieve all published Vendors
+    router.get("/published", vendors.findAllPublished);
+  
+    // Retrieve a single Vendor with id
+    router.get("/:id", vendors.findOne);
+  
+    // Update a Vendor with id
+    router.put("/:id", vendors.update);
+  
+    // Delete a Vendor with id
+    router.delete("/:id", vendors.delete);
+  
+    // Delete all Vendors
+    router.delete("/", vendors.deleteAll);
 
-// Routes
-router.get('/vendors', vendorController.getAllVendors);
-// Define other routes for CRUD operations
-
-module.exports = router;
+     // Fetch Counting of all Vendors
+  router.get("/test/ftd", vendors.findTotalVendors);
+  
+    app.use('/api/vendors', router);
+  };
+  

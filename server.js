@@ -37,8 +37,8 @@ app.get("/", (req, res) => {
 });
 
 
-// routes blood bank:
-require("./app/routes")(app);
+// routes vms:
+require("./app/routes/vendor.routes")(app);
 
 
 // set port, listen for requests
